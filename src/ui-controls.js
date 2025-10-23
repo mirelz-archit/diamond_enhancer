@@ -152,14 +152,14 @@ export function createPostProcessingControls() {
     dispersionSlider.min = '0';
     dispersionSlider.max = '0.01';
     dispersionSlider.step = '0.0001';
-    dispersionSlider.value = '0.003';
+    dispersionSlider.value = '0';
     dispersionSlider.style.position = 'absolute';
     dispersionSlider.style.top = '200px';
     dispersionSlider.style.left = '20px';
     dispersionSlider.style.zIndex = '1000';
 
     const dispersionLabel = document.createElement('label');
-    dispersionLabel.innerHTML = 'Dispersion: 0.003';
+    dispersionLabel.innerHTML = 'Dispersion: 0.0000';
     dispersionLabel.style.position = 'absolute';
     dispersionLabel.style.top = '200px';
     dispersionLabel.style.left = '150px';

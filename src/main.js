@@ -153,6 +153,17 @@ class DiamondViewerApp {
         console.log('Diamond env map:', this.diamondEnvMap);
         console.log('Diamond texture:', this.diamondTexture);
         
+        // Check for null environment maps and show console errors
+        if (!this.metalEnvMap) {
+            console.error('❌ ERROR: Metal environment map is NULL!');
+        }
+        if (!this.diamondEnvMap) {
+            console.error('❌ ERROR: Diamond environment map is NULL!');
+        }
+        if (!this.diamondTexture) {
+            console.error('❌ ERROR: Diamond texture is NULL!');
+        }
+        
         // Set initial diamond preview
         if (this.diamondTexture) {
             this.setDiamondPreviewFromEquirectTexture(this.diamondTexture);
@@ -224,7 +235,7 @@ class DiamondViewerApp {
             this.scene.traverse((child) => {
                 if (child.isMesh && child.material && child.material.uniforms && child.material.uniforms.hasEnvMap !== undefined) {
                     console.log('Applying fallback to diamond material:', child.name);
-                    child.material.uniforms.cubeEnvMap.value = fallbackEnvMap;
+                    child.material.uniforms.envMap.value = fallbackEnvMap;
                     child.material.uniforms.hasEnvMap.value = true;
                     child.material.uniforms.envMapIntensity.value = 5.0;
                     child.material.needsUpdate = true;
@@ -284,7 +295,8 @@ class DiamondViewerApp {
                 child.material.uniforms.debugMode.value = 0;
                 
                 if (this.diamondEnvMap) {
-                    child.material.uniforms.cubeEnvMap.value = this.diamondEnvMap;
+                    console.log('Setting diamond environment map:', this.diamondEnvMap);
+                    child.material.uniforms.envMap.value = this.diamondEnvMap;
                     child.material.uniforms.hasEnvMap.value = true;
                 } else {
                     child.material.uniforms.hasEnvMap.value = false;

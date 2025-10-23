@@ -23,7 +23,7 @@ export function updateEnvironmentMap(file, target, renderer, scene, metalEnvMap,
             if (target === 'diamond') {
                 diamondEnvMap = envMap;
                 // Generate a small preview from the original equirect texture
-                setDiamondPreviewFromEquirectTexture(texture, updateDiamondPreview);
+                setDiamondPreviewFromEquirectTexture(texture, renderer, updateDiamondPreview);
             } else {
                 metalEnvMap = envMap;
             }
@@ -77,7 +77,7 @@ function applyEnvMapToMaterial(material, child, metalEnvMap, diamondEnvMap, meta
             // Update shader uniforms for diamond material
             if (material.uniforms) {
                 material.uniforms.envMapIntensity.value = diamondEnvIntensity;
-                material.uniforms.cubeEnvMap.value = diamondEnvMap;
+                material.uniforms.envMap.value = diamondEnvMap;
                 material.uniforms.hasEnvMap.value = true;
             }
         } else {

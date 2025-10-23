@@ -159,14 +159,17 @@ function setupDiamondMaterial(child, diamondEnvMap, diamondEnvIntensity) {
         console.log('Environment map type:', diamondEnvMap.mapping);
         console.log('Environment map format:', diamondEnvMap.format);
         console.log('Environment map type:', diamondEnvMap.type);
-        child.material.uniforms.cubeEnvMap.value = diamondEnvMap;
+        child.material.uniforms.envMap.value = diamondEnvMap;
         child.material.uniforms.hasEnvMap.value = true;
         console.log('Diamond material uniforms after env map setup:', child.material.uniforms);
     } else {
-        console.warn('No diamond environment map available! Creating fallback environment map...');
+        console.error('❌ ERROR: Diamond environment map is NULL! Using fallback environment map...');
+        console.error('This may cause reduced visual quality in diamond reflections.');
+        console.error('Please ensure environment maps are properly loaded.');
+        
         // Create and use a fallback environment map
         const fallbackEnvMap = createFallbackEnvironmentMap();
-        child.material.uniforms.cubeEnvMap.value = fallbackEnvMap;
+        child.material.uniforms.envMap.value = fallbackEnvMap;
         child.material.uniforms.hasEnvMap.value = true;
         child.material.uniforms.envMapIntensity.value = Math.max(diamondEnvIntensity, 3.0); // Ensure minimum intensity
         console.log('Using fallback environment map with intensity:', child.material.uniforms.envMapIntensity.value);

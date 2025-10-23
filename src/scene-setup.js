@@ -79,7 +79,7 @@ export function setupPostProcessing(composer, scene, camera) {
     const ChromaticAberrationShader = {
         uniforms: {
             'tDiffuse': { value: null },
-            'offset': { value: 0.001 }
+            'offset': { value: 0.0 }
         },
         vertexShader: `
             varying vec2 vUv;
@@ -105,12 +105,12 @@ export function setupPostProcessing(composer, scene, camera) {
     
     // Chromatic aberration for dispersion effect
     const chromaticAberrationPass = new ShaderPass(ChromaticAberrationShader);
-    chromaticAberrationPass.uniforms['offset'].value = 0.001;
+    chromaticAberrationPass.uniforms['offset'].value = 0.0;
     composer.addPass(chromaticAberrationPass);
     
     // RGB shift for dispersion
     const rgbShiftPass = new ShaderPass(RGBShiftShader);
-    rgbShiftPass.uniforms['amount'].value = 0.003;
+    rgbShiftPass.uniforms['amount'].value = 0.0;
     rgbShiftPass.uniforms['angle'].value = 0.0;
     composer.addPass(rgbShiftPass);
     
